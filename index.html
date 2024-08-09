@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Sell Corner</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Navbar started -->
+    <div class="bg-[#4c68ff] text-[#ffff] font-bold h-16 pl-5 flex items-center justify-start text-xl">
+        <h1>Buy / Sell Corner</h1>
+    </div>
+    <!-- Navbar ended -->
+
+    <!-- Main content wrapper -->
+    <div class="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
+        <!-- <div class="border w-full max-w-md rounded-box bg-[#fff6f6] flex flex-col items-center justify-center p-6"> -->
+        <form action="#" id="registerForm"
+            class="border w-full max-w-md rounded-box bg-[#fff6f6] flex flex-col items-center justify-center p-6">
+            <label class="form-control w-full max-w-xs">
+                <div class="label font-bold mb-2">
+                    <span class="label-text">Email</span>
+                </div>
+                <input type="email" id="email" placeholder="Enter your Email" class="input input-bordered w-full mb-4 p-2"
+                    required />
+
+                <div class="label font-bold mb-2">
+                    <span class="label-text">Password</span>
+                </div>
+                <input type="password" id="password" placeholder="Enter your Password" class="input input-bordered w-full mb-4 p-2"
+                    required />
+            </label>
+            <button class="bg-[#4c68ff] text-[#ffff] px-4 py-2 rounded my-5">Login</button>
+            <a href="register.html" class="text-[#4c68ff]">Not a user? Please Register First</a>
+        </form>
+        <!-- </div> -->
+    </div>
+    <!-- Form ended -->
+
+    <script type="module" src="./app.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</body>
+
+</html>
