@@ -1,5 +1,5 @@
 import { auth, db, onAuthStateChanged, signOut } from './config.js';
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { doc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logout');
@@ -7,24 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     onAuthStateChanged(auth, async (user) => {
         if (user) {
-            console.log('User is signed in:', user);
+            let uid = user.uid
+            console.log(uid);
+            
             logoutButton.style.display = 'block';
 
-            const userDocRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userDocRef);
+            const q = query(collection(db, "users"), where("uid", "==", uid));
 
-            if (userDoc.exists()) {
-                const userData = userDoc.data();
-                console.log('User document data:', userData);
-                if (userData.imageLink) {
-                    console.log('Profile Image URL:', userData.imageLink); 
-                    profileImage.src = userData.imageLink; 
-                } else {
-                    console.log('No image URL found in user data.');
-                }
-            } else {
-                console.log("No such document!");
-            }
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach((doc) => {
+                console.log(doc.data());
+                let data = doc.data()
+                profileImage.src = data.imageLink
+            });
+
         } else {
             console.log('No user is signed in');
             logoutButton.style.display = 'none';
