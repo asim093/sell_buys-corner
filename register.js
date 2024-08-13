@@ -10,7 +10,27 @@ form.addEventListener('submit', async (event) => {
     const firstName = document.querySelector('input[placeholder="First Name"]').value;
     const lastName = document.querySelector('input[placeholder="Last Name"]').value;
     const image = document.querySelector(".file-input").files[0];
-
+    const bodyLoader = document.querySelector('.bg-gray-100');
+    
+    async function uploadImageAndGetUrl(email, file) {
+        const storage = getStorage();
+        const imageRef = ref(storage, `${email}profile.jpg`); 
+        try {
+            await uploadBytes(imageRef, file);
+            const url = await getDownloadURL(imageRef);
+            console.log('Uploaded Image URL:', url);
+            return url;
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            throw error;
+        }
+    }
+    
+    bodyLoader.innerHTML = `
+<div class="loader-container fixed inset-0 flex items-center justify-center bg-white bg-opacity-75  z-50">
+<span class="loading loading-dots w-24 h-24"></span>
+</div>
+`
     try {
         const imageUrl = await uploadImageAndGetUrl(email, image); 
 
@@ -27,13 +47,18 @@ form.addEventListener('submit', async (event) => {
 
         console.log("Document written with ID: ", docRef.id);
 
+        bodyLoader.innerHTML = `
+        <div class="loader-container fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 hidden  z-50">
+        <span class="loading loading-dots loading-lg"></span>
+        </div>
+        `
         swal({
             title: "User Registration",
             text: "User registration successful",
             icon: "success",
             button: "Ok",
         }).then(() => {
-            window.location = 'index.html';
+            window.location = 'login.html';
         });
     } catch (error) {
         swal({
@@ -42,20 +67,6 @@ form.addEventListener('submit', async (event) => {
             icon: "error",
             button: "Ok",
         });
-        console.error(error);
-    }
+window.location = 'register.html'    }
 });
 
-async function uploadImageAndGetUrl(email, file) {
-    const storage = getStorage();
-    const imageRef = ref(storage, `${email}profile.jpg`); 
-    try {
-        await uploadBytes(imageRef, file);
-        const url = await getDownloadURL(imageRef);
-        console.log('Uploaded Image URL:', url);
-        return url;
-    } catch (error) {
-        console.error('Error uploading image:', error);
-        throw error;
-    }
-}

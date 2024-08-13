@@ -1,8 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-import { getAuth, onAuthStateChanged, signOut , createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
-import { getStorage ,  ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
-import { getDocs , collection, addDoc , getFirestore  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; 
+import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
+import { getStorage, ref, uploadBytes, getDownloadURL  } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
+import { getDocs, collection, addDoc, getFirestore, query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBjj2rIb5Gi00OG9ZulavfaSvmd6P3WkeI",
   authDomain: "buy-sell-corner-6dc98.firebaseapp.com",
@@ -15,8 +16,38 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
-export { onAuthStateChanged, signOut , getDocs , createUserWithEmailAndPassword , collection, addDoc , ref, uploadBytes, getDownloadURL , getStorage };
-  
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+const profileImage = document.getElementById('profile-view');
+
+export function checkAuthStateAndLoadProfile() {
+    onAuthStateChanged(auth, async (user) => {
+        const currentPath = window.location.pathname;
+        
+        if (!user) {
+            if (currentPath === '/postad.html' || currentPath === '/singleproduct.html') {
+                window.location.href = 'login.html';
+            }
+        } else {
+            // User is authenticated
+            if (profileImage) {
+                try {
+                    const uid = user.uid;
+                    const q = query(collection(db, "users"), where("uid", "==", uid));
+                    const querySnapshot = await getDocs(q);
+                    
+                    querySnapshot.forEach((doc) => {
+                        let data = doc.data();
+                        profileImage.src = data.imageLink; 
+                    });
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                }
+            }
+        }
+    });
+}
+
+export { auth, db, storage, getStorage, onAuthStateChanged, signOut, createUserWithEmailAndPassword, getDocs, collection, addDoc, ref, uploadBytes, getDownloadURL };
