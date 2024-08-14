@@ -43,10 +43,12 @@ form.addEventListener('submit', async (event) => {
             text: error.message,
             icon: "error",
             button: "Ok",
-        });
-        console.error(error);
+        }).then(()=>{
+            console.error(error);
 
-        bodyLoader.innerHTML = '';
-        window.location = 'login.html';
+            bodyLoader.innerHTML = '';
+            window.location = 'login.html';
+        });
+        
     }
 });
