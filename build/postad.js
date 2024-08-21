@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function uploadProductImageAndGetUrl(product_title, product_image) {
-        const imagePath = `${product_title.value}.jpg`; 
+        const imagePath = `${product_title.value}.jpg`; // Fixed image path
         const imageRef = ref(storage, imagePath);
         try {
             await uploadBytes(imageRef, product_image);
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (bodyLoader) {
-                    bodyLoader.innerHTML = ''; 
+                    bodyLoader.innerHTML = ''; // Hide the loader
                 }
 
                 swal({

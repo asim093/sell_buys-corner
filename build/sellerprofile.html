@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Sell Corner</title>
+    <title>User Profile - Buy Sell Corner</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -65,11 +65,9 @@
                     </summary>
                     <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow text-black">
                         <li><a href="postad.html">Post Ad</a></li>
-                        <li><a href="index.html">Show All Ad</a></li>
-                        <li><a href="Profile.html">Profile</a></li>
-                        <li><a href="addtocart.html">Add to cart</a></li>
-
+                        <li><a href="index.html">Show All Ads</a></li>
                         <li><a href="wishlist.html">Wishlist</a></li>
+                        <li><a href="Profile.html">Profile</a></li>
                         <li>
                             <button id="logout"><a>Logout</a></button>
                         </li>
@@ -80,34 +78,45 @@
     </div>
 
     <!-- Page Content -->
-    <div class="container mx-auto p-4 md:w-[80%] mt-10">
-        <!-- Centered Search Bar -->
-        <div class="flex justify-center mb-8">
-            <label class="input input-bordered flex items-center gap-2 w-full md:w-[100%]">
-                <button id="search-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
-                        <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <input type="text" id="Search" class="grow" placeholder="Search" />
-            </label>
-        </div>
+    <div class="flex flex-col items-center mt-8" >
+        <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-3xl">
+            <!-- Profile Header -->
+            <div class="flex flex-col items-center mb-6">
+                <div class="w-32 h-32 rounded-full overflow-hidden mb-4">
+                    <img src="https://tse1.explicit.bing.net/th?id=OIP.ng9AohkIBnR63dKXG2OTRwHaEo&pid=Api&P=0&h=220"
+                        alt="User Profile Picture" id="seller_image" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-3xl font-semibold mb-2" id="seller_name">John Doe</h2>
+                <p class="text-gray-600 mb-2" id="seller_email">john.doe@example.com</p>
+                <p class="text-gray-600 mb-4" id="seller_number">Phone: (123) 456-7890</p>
+                <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">Edit Profile</button> -->
+            </div>
 
-        <!-- Products Section -->
-        <h1 class="text-4xl font-bold mb-6 text-start">Products</h1>
-
-        <!-- Flexbox for Cards -->
-        <div class="card-div flex flex-wrap justify-start gap-8">
-            
+            <!-- Recent Projects or Posts -->
+            <div class="mt-8">
+                <h3 class="text-2xl font-semibold mb-4">Recent Ads</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="seller_main">
+                    <!-- Example Project Card 1 -->
+                    <div class="bg-white shadow-md  p-4">
+                        <img src="https://via.placeholder.com/300x200" alt="Project Image" id="recent_images" class="w-full h-40 object-cover rounded-md mb-4">
+                        <h4 class="text-lg font-semibold mb-2">Project Title 1</h4>
+                        <p class="text-gray-600">Brief description of the project goes here. This can include technologies used, project goals, and outcomes.</p>
+                    </div>
+                    <!-- Example Project Card 2 -->
+                    
+                </div>
+            </div>
         </div>
     </div>
-
+    <div class="loader min-h-screen flex flex-col"></div>
     
 
     <!-- JavaScript -->
     <script type="module" src="config.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="module" src="home.js"></script>
+    <script type="module" src="seller.js"></script>
+    <script type="module" src="profile.js"></script>
     <script>
         // Theme switcher script
         const themeInputs = document.querySelectorAll('.theme-controller');

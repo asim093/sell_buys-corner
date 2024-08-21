@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Sell Corner</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <div class="bg-[#4c68ff] text-[#ffff] font-bold h-16 pl-5 flex items-center justify-start text-xl">
+        <h1>Buy / Sell Corner</h1>
+    </div>
+    <div class="flex flex-1 items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div class="border w-full max-w-md rounded-box bg-[#fff6f6] flex flex-col items-center justify-center p-6">
+            <form id="registerForm" class="form-control w-full max-w-xs">
+                <input type="text" placeholder="First Name" class="input input-bordered w-full mb-4 p-2 text-[#4c68ff]" required />
+                <input type="text" placeholder="Last Name" class="input input-bordered w-full mb-4 p-2 text-[#4c68ff]" required />
+                <input type="email" id="email" placeholder="Email" class="input input-bordered w-full mb-4 p-2 text-[#b7d2cc]" required />
+                <input type="password" id="password" placeholder="Password" class="input input-bordered w-full mb-4 p-2" required />
+                <input type="file" class="file-input file-input-info w-full max-w-xs" />
+                <button type="submit" class="bg-[#4c68ff] text-[#ffff] px-4 py-2 rounded my-5">Register</button>
+            </form>
+            <a href="index.html" class="text-[#4c68ff]">Already a user? Please Login First</a>
+        </div>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="./config.js"></script>
+    <script type="module" src="./register.js"></script>
+</body>
+</html>

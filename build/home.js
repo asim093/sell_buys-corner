@@ -10,13 +10,13 @@ const searchButton = document.getElementById('search-button');
 const cardMain = document.querySelector('.card-main');
 const wishlistitems = document.getElementById('wishlist-items');
 
-let selectedProduct = null;
+let selectedProduct = null; 
 let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
 checkAuthStateAndLoadProfile(auth, db, profileImage);
 
 async function getAllProducts(searchValue = '') {
-    carddiv.innerHTML = '<span class="loading loading-dots w-24 h-24 mx-auto pt-10"></span>';
+    carddiv.innerHTML = '<span class="loading loading-dots w-24 h-24 mx-auto pt-10"></span>'; 
 
     try {
         const productsQuery = query(collection(db, "Products"));
@@ -29,7 +29,7 @@ async function getAllProducts(searchValue = '') {
 
         querySnapshot.forEach((doc) => {
             const productData = doc.data();
-            productData.id = doc.id;
+            productData.id = doc.id;  
             cardArray.push(productData);
         });
 
@@ -72,10 +72,9 @@ async function getAllProducts(searchValue = '') {
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        getAllProducts();
+        getAllProducts(); 
 
-        searchButton.addEventListener('click', (event) => {
-            event.preventDefault();
+        searchButton.addEventListener('click', () => {
             const searchValue = searchInput.value.trim();
             getAllProducts(searchValue);
         });
@@ -161,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 <div class="flex flex-col lg:flex-row w-full justify-between">
                     <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
-                        <button class="btn btn-primary w-full px-10" id='Addtocart'>ADD TO CART</button>
+                        <button class="btn btn-primary w-full px-10" id='SellerPopup'>ADD TO CART</button>
                     </div>
 
                     <div class="flex items-center space-x-2 mt-2">
@@ -189,44 +188,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-        const Addtocart = document.getElementById('Addtocart');
-        const cartArray = JSON.parse(localStorage.getItem('cart')) || [];
-        Addtocart.addEventListener('click', (event) => {
-            event.preventDefault();
-            try {
-                cartArray.push(selectedProduct);
-                const cartData = localStorage.setItem('cart', JSON.stringify(cartArray));
-                swal({
-                    title: "Add to cart Successful",
-                    text: "your Item has Add to cart successfully",
-                    icon: "success",
-                    button: "Ok",
-                });
-            } catch (error) {
-                swal({
-                    title: "Add to cart Failed",
-                    text: error.message,
-                    icon: "error",
-                    button: "Ok",
-                });
-            }
-        });
-        
-
+      
         const sellerPopup = document.getElementById('SellerPopup');
-        sellerPopup.addEventListener('click', () => {
-            try {
+        sellerPopup.addEventListener('click' , () => {
+            try{
                 console.log('number')
                 swal({
                     title: "Call Karle Khud",
                     text: selectedProduct.sellerNumber,
+                    // icon: "info",
                     button: "Ok",
                 })
-            } catch {
+            }catch{
                 alert('NO NUMBER FOUND')
             }
-
+            
         });
 
         const sellerImage = document.getElementById('sellerImage');
@@ -238,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const uid = user.uid;
                         const q = query(collection(db, "users"), where("uid", "==", selectedProduct.uid));
                         const querySnapshot = await getDocs(q);
-
+                       
 
                         querySnapshot.forEach((doc) => {
                             let data = doc.data();
